@@ -4,7 +4,7 @@ import {signIn, signOut} from "next-auth/react";
 
 const SignButton = () => {
   return (
-    <Button variant={'outline'} onClick={()=>signIn("credentials")} className='text-white tracking-wide'>sign in</Button>
+    <Button variant={'outline'} onClick={()=>signIn("github")} className='text-white tracking-wide'>sign in</Button>
   )
 }
 

@@ -2,6 +2,8 @@ import { getServerSession, type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import user from "@/schemas/User";
+import connectDb from "./connectDb";
 
 export const authOptions: NextAuthOptions = {
     providers:[
@@ -35,12 +37,21 @@ export const authOptions: NextAuthOptions = {
     callbacks:{
         async jwt({token,account}) {
             console.log("before",token);
-                        
+            try{
+                await connectDb(process.env.MONGO_URI!)
+                const existingUser = await user.findOne({name:token.name,email:token.email});
+                if(!existingUser)
+                    await user.create({name:token.name,email:token.email,image:token.picture});  
+            }catch(err){
+                console.log(err);
+                
+            }
+                   
             return token;
         },
         async session({session,token}){
             if(session && session.user){
-                
+
                 session.user.accessToken=String(token.accessToken);
             }
             console.log(session);
