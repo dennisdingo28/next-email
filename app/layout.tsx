@@ -3,7 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import {cookies} from "next/headers";
 import Container from '@/components/ui/container';
-
+import AuthProvider from '@/components/AuthProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={theme?.value ==="dark" ? "dark":""}>
       <body className='min-h-[100vh] bg-slate-200 dark:bg-[#181818]'>
-        <Container>
-          <Navbar/>
-          {children}
-        </Container>
+        <AuthProvider>
+          <Container>
+            <Navbar/>
+            {children}
+          </Container>
+        </AuthProvider>
       </body>
     </html>
   )
