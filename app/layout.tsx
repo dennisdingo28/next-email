@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import {cookies} from "next/headers";
+import Container from '@/components/ui/container';
 
 
 export const metadata: Metadata = {
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={theme?.value ==="dark" ? "dark":""}>
       <body className='min-h-[100vh] bg-slate-200 dark:bg-[#181818]'>
-        <Navbar/>
-        {children}
+        <Container>
+          <Navbar/>
+          {children}
+        </Container>
       </body>
     </html>
   )
