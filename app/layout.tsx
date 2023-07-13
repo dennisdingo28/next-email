@@ -19,6 +19,9 @@ export default function RootLayout({
   
   return (
     <html lang="en" className={theme?.value ==="dark" ? "dark":""}>
+      <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+      </head>
       <body className='min-h-[100vh] bg-slate-200 dark:bg-[#181818]'>
         <AuthProvider>
           <Container>
