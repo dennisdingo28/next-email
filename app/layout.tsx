@@ -1,5 +1,7 @@
+import Navbar from '@/components/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
+import {cookies} from "next/headers";
 
 
 export const metadata: Metadata = {
@@ -12,9 +14,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const theme = cookies().get("theme");
+  
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={theme?.value ==="dark" ? "dark":""}>
+      <body className='min-h-[100vh] bg-slate-200 dark:bg-[#181818]'>
+        <Navbar/>
         {children}
       </body>
     </html>
