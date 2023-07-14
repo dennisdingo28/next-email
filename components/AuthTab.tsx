@@ -1,7 +1,8 @@
 "use client"
 import {Tab} from "@headlessui/react"
 import { useState } from "react"
-
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
 const AuthTab:React.FC = ({}) => {
     const [signInTab,setSignInTab] = useState<boolean>(true);
@@ -9,22 +10,23 @@ const AuthTab:React.FC = ({}) => {
     
   return (
     <Tab.Group>
+        <Tab.Panels>
+            <Tab.Panel>
+                <LoginForm/>
+            </Tab.Panel>
+            <Tab.Panel>
+                <SignUpForm/>
+            </Tab.Panel>
+        </Tab.Panels>
         <Tab.List>
             <Tab onClick={() => setSignInTab(true)}>
                 <p className={`${signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative" }`}>Sign in</p>
             </Tab>
             <Tab onClick={() => setSignInTab(false)}>
-                <p className={`${!signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative"}`}>I do not have an account</p>
+                <p className={`${!signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative"} text-[.8em]`}>I do not have an account</p>
             </Tab>
         </Tab.List>
-        <Tab.Panels>
-            <Tab.Panel>
-                <p className={`${signInTab ? "opacity-100 z-10 relative" : "opacity-0 -z-10 absolute"}`}>sign in content</p>
-            </Tab.Panel>
-            <Tab.Panel>
-                <p className={`${!signInTab ? "opacity-100 z-10 relative" : "opacity-0 -z-10 absolute"}`}>create content</p>
-            </Tab.Panel>
-        </Tab.Panels>
+
     </Tab.Group>
     );
 

@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import {cookies} from "next/headers";
 import Container from '@/components/ui/container';
 import AuthProvider from '@/components/AuthProvider';
+import ToasterProivder from '@/providers/toast-provider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -28,6 +29,7 @@ export default function RootLayout({
             <Navbar/>
             {children}
           </Container>
+          <ToasterProivder/>
         </AuthProvider>
       </body>
     </html>

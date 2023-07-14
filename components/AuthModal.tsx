@@ -14,8 +14,8 @@ const AuthModal: React.FC = () => {
             <span className="text-center">or</span>
         </div>
         <div className="">
-            <h5 className="text-[1.05em] font-semibold">Sign in with your NextEmail account</h5>
-            <div className="z-10">
+            <h5 className="text-[1.05em] font-semibold text-center">Sign in with your NextEmail account</h5>
+            <div className="mt-3">
               <AuthTab/>
             </div>
         </div>
