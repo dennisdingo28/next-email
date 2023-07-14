@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import user from "@/schemas/User";
 import connectDb from "./connectDb";
+import generateJWT from "./generateJWT";
 
 export const authOptions: NextAuthOptions = {
     providers:[
@@ -38,12 +39,25 @@ export const authOptions: NextAuthOptions = {
             
             await connectDb(process.env.MONGO_URI!)
             const existingUser = await user.findOne({name:token.name,email:token.email});
+            
             if(!existingUser)
                 await user.create({name:token.name,email:token.email,image:token.picture});  
+            
+            const userJwt = generateJWT({name:token.name!,email:token.email!,image:token.picture!});
+            
+            token.access_token = userJwt;
+
             return token;
-               
         },
-        async session({session,token}){            
+        async session({session,token}){
+            if(session && session.user && token){
+                session.user.token = String(token.access_token);
+            }
+            const currentUser = await user.findOne({name:session.user?.name,email:session.user?.email});
+                
+            if (session.user && currentUser) {
+                session.user._id = String(currentUser._id);
+            }           
             return session;
         }
     }
