@@ -15,7 +15,9 @@ const AuthModal: React.FC = () => {
         </div>
         <div className="">
             <h5 className="text-[1.05em] font-semibold">Sign in with your NextEmail account</h5>
-            <AuthTab/>
+            <div className="z-10">
+              <AuthTab/>
+            </div>
         </div>
     </Modal>
   )
