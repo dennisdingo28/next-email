@@ -1,15 +1,11 @@
 import AuthTab from "./AuthTab"
-import CardIcon from "./ui/card-icon"
+import LoginProviders from "./LoginProviders"
 import Modal from "./ui/modal"
-
 
 const AuthModal: React.FC = () => {
   return(
     <Modal modalTitle="Sign in with your account" modalDescription="Authenticate and unleash the power of NextEmail">
-        <div className="flex items-center justify-center gap-8">
-            <CardIcon icon={<i className="bi bi-google"></i>}/>
-            <CardIcon icon={<i className="bi bi-github"></i>}/>
-        </div>
+        <LoginProviders/>
         <div className="flex items-center justify-center my-3">
             <span className="text-center">or</span>
         </div>

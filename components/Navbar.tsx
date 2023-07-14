@@ -4,7 +4,6 @@ import NavbarLink from './ui/navbar-link'
 import SignButton from './SignButton'
 import { getAuthSession } from '@/lib/auth'
 import UserProfile from './ui/user-profile'
-import Modal from './ui/modal'
 import AuthModal from './AuthModal'
 
 const Navbar: React.FC = async () => {

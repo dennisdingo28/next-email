@@ -12,7 +12,7 @@ const AuthTab:React.FC = ({}) => {
     <Tab.Group>
         <Tab.Panels>
             <Tab.Panel>
-                <LoginForm/>
+                <LoginForm />
             </Tab.Panel>
             <Tab.Panel>
                 <SignUpForm/>
@@ -20,10 +20,10 @@ const AuthTab:React.FC = ({}) => {
         </Tab.Panels>
         <Tab.List>
             <Tab onClick={() => setSignInTab(true)}>
-                <p className={`${signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative" }`}>Sign in</p>
+                <p className={`${signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative" } text-[.8em] underline mt-3`}>I already have an account</p>
             </Tab>
             <Tab onClick={() => setSignInTab(false)}>
-                <p className={`${!signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative"} text-[.8em]`}>I do not have an account</p>
+                <p className={`${!signInTab ? "opacity-0 -z-10 absolute":"opacity-100 z-10 relative"} text-[.8em] underline mt-3`}>I do not have an account</p>
             </Tab>
         </Tab.List>
 

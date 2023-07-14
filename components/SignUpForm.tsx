@@ -2,12 +2,14 @@
 import {useForm} from "react-hook-form";
 import { SignUpRequest, SignUpValidator } from "@/validators";
 import {zodResolver} from "@hookform/resolvers/zod";
-import { useEffect,useState } from "react";
+import { HTMLAttributes, useEffect,useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import createAccount from "@/lib/createAccount";
 import {toast} from "react-hot-toast"
 
-const SignUpForm: React.FC= () => {
+interface SignUpFormProps extends HTMLAttributes<HTMLFormElement>{};
+
+const SignUpForm: React.FC<SignUpFormProps> = ({className}) => {
     const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
 
     const {register,handleSubmit, formState:{errors}} = useForm({
@@ -41,7 +43,7 @@ const SignUpForm: React.FC= () => {
     
 
   return(
-    <form onSubmit={handleSubmit((data)=>createUser(data))}>
+    <form className={className} onSubmit={handleSubmit((data)=>createUser(data))}>
         <div className="flex flex-col gap-3">
             <input className="text-slate-300 text-[.90em] bg-transparent border-b border-b-slate-600 outline-none max-w-[100%] w-[100%] px-1" placeholder="username" {...register("username")}/>
             {showErrorMessage && <p className="text-red-600"><small>{errors.username?.message}</small></p>}
