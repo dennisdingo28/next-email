@@ -1,13 +1,13 @@
 import { Schema,model,models } from "mongoose";
 import { UserSchemaProps, UserJwtPayload, UserRoles } from "@/types";
 import jwt from "jsonwebtoken";
-
+import bcrypt from "bcrypt"
 
 const UserSchema = new Schema<UserSchemaProps>({
     name:{
         type:String,
-        required:[true,'You must provide a name'],
         unique:true,
+        required:[true,'You must provide a name'],
     },
     email:{
         type:String,
@@ -32,6 +32,20 @@ const UserSchema = new Schema<UserSchemaProps>({
 UserSchema.methods.generateJWT= (payload: UserJwtPayload) => {
     return jwt.sign(payload,process.env.JWT_ENCRYPTION!,{expiresIn:"30d"});
 }
+
+UserSchema.pre('save',async function(){
+    try{
+        const salt = await bcrypt.genSalt(10);
+        if(this.password){
+            const hashedPassword = await bcrypt.hash(this.password,salt);
+            this.password = hashedPassword;
+        }else{
+            throw new Error("Password is empty");
+        }
+    }catch(err){
+        console.log(err);
+    }
+})
 
 const user = models.User || model("User",UserSchema);
 

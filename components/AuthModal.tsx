@@ -7,10 +7,10 @@ const AuthModal: React.FC = () => {
     <Modal modalTitle="Sign in with your account" modalDescription="Authenticate and unleash the power of NextEmail">
         <LoginProviders/>
         <div className="flex items-center justify-center my-3">
-            <span className="text-center">or</span>
+            <span className="text-center text-slate-400">or</span>
         </div>
         <div className="">
-            <h5 className="text-[1.05em] font-semibold text-center">Sign in with your NextEmail account</h5>
+            <h5 className="text-[1.05em] font-semibold text-center text-white">Sign in with your NextEmail account</h5>
             <div className="mt-3">
               <AuthTab/>
             </div>

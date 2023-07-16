@@ -45,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({className}) => {
             {showErrorMessage && <p className="text-red-600"><small>{errors.password?.message}</small></p>}
         </div>
         <div className="text-center mt-3">
-            <input type="submit" value={"Sign In"} className="h-10 cursor-pointer px-4 py-2 border dark:border-purple-800 bg-purple-700 hover:bg-purple-800 duration-100 dark:bg-transparent dark:hover:border-purple-900 text-[.86em]"/>
+        <input type="submit" disabled={isLoading} value={"Sign In"} className={`h-10 text-white cursor-pointer px-4 py-2 border border-purple-800 ${!isLoading ? "bg-purple-600":"bg-purple-900 cursor-not-allowed pointer-events-auto"} duration-100 dark:hover:border-purple-900 text-[.86em] `}/>
         </div>
     </form>
   )

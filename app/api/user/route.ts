@@ -2,7 +2,7 @@ import connectDb from "@/lib/connectDb";
 import user from "@/schemas/User";
 import { SignUpValidator } from "@/validators";
 import { NextRequest, NextResponse } from "next/server";
-import { MongoServerError } from 'mongodb';
+import { MongoAPIError, MongoServerError } from 'mongodb';
 import * as z from "zod";
 
 
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest){
         console.log(data);
         
         if(!data || Object.keys(data).length===0)
-            return NextResponse.json("The payload was empty. Please try again later.",{status:400});
+            return new NextResponse("The payload was empty. Please try again later.",{status:400});
         
         SignUpValidator.parse(data);        
         
@@ -22,26 +22,27 @@ export async function POST(req: NextRequest){
         const newUser = await user.create(data);
         console.log(newUser);
 
-        return NextResponse.json({msg:"Account was successfully created !",ok:true},{status:200});
+        return NextResponse.json({msg:"Account was successfully created !"},{status:200});
 
         
-    }catch(err){
+    }catch(err: unknown){
         console.log(err);
         
         if(err instanceof z.ZodError)
-            return NextResponse.json({msg:"Invalid payload format. Please try again later.",ok:false},{status:400});
-        
-        if(err instanceof MongoServerError){
-            if(err.code===11000)
+            return new NextResponse("Invalid payload format. Please try again later.",{status:400});
+            
+            
+            if((err as MongoServerError).code===11000)
             {
-                if(err.keyValue.email){
-                    return NextResponse.json({msg:`Email "${err.keyValue.email}" already exists.`,ok:false},{status:400});
-                }else if(err.keyValue.name){
-                    return NextResponse.json({msg:`Name "${err.keyValue.name}" already exists.`,ok:false},{status:400});
+                if((err as MongoServerError).keyValue.email){
+                    return new NextResponse(`Email "${(err as MongoServerError).keyValue.email}" already exists.`,{status:400});
+                }else if((err as MongoServerError).keyValue.name){
+
+                    
+                    return new NextResponse(`Name "${(err as MongoServerError).keyValue.name}" already exists.`,{status:400});
                 }
             }
-            return NextResponse.json({msg:"Something went wrong please try again later.",ok:false},{status:400});
+            return new NextResponse("Something went wrong please try again later.",{status:400});
 
-        }
     }
 }

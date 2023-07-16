@@ -24,14 +24,20 @@ const SignUpForm: React.FC<SignUpFormProps> = ({className}) => {
 
     const {mutate:createUser, isLoading} = useMutation({
         mutationFn: async (data: SignUpRequest) => await createAccount(data),
+        onSuccess:(data: any)=>{
+            console.log("suc",data);
+            
+            toast.success(`${data.msg}`);
+        },
         onError:(err: any)=>{
             console.log((err as Error).message);
             if(!err.response.ok)
-                toast.error(`${err.response.data.msg}`);
+                toast.error(`${err.response.data}`);
             else toast.error(`${(err as Error).message}`)
         }
     });
-
+    console.log("loading",isLoading);
+    
     useEffect(()=>{
         if(Object.keys(errors).length>0){
           setShowErrorMessage(true)
@@ -56,7 +62,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({className}) => {
             {showErrorMessage && <p className="text-red-600"><small>{errors.password?.message}</small></p>}
         </div>
         <div className="text-center mt-3">
-            <input type="submit" disabled={isLoading} value={"Create Account"} className="h-10 cursor-pointer px-4 py-2 border dark:border-purple-800 bg-purple-700 hover:bg-purple-800 duration-100 dark:bg-transparent dark:hover:border-purple-900 text-[.86em]"/>
+           <input type="submit" disabled={isLoading} value={"Create Account"} className={`h-10 cursor-pointer px-4 py-2 border border-purple-800 text-white ${!isLoading ? "bg-purple-600":"bg-purple-900 cursor-not-allowed pointer-events-auto"} duration-100 dark:hover:border-purple-900 text-[.86em] `}/>
         </div>
     </form>
   )
