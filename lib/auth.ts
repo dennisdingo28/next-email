@@ -19,16 +19,31 @@ export const authOptions: NextAuthOptions = {
         CredentialsProvider({
             name:"Credentials",
             credentials:{
-                username:{label:"Username", type:"text", placeholder:"your username"},
-                email:{label:"Email", type:"email", placeholder:"your email"},
+                identifier:{label:"Username/Email",type:"text",placeholder:"username or email"},
                 password:{label:"Password",type:"password", placeholder:"your password"},
-                image:{label:"Profile image",type:"file"}
+
             },
             async authorize(credentials, req) {
-            
-                const targetUser = await user.findOne({name:credentials?.username,email:credentials?.email});
-                if(targetUser)
-                    return targetUser;
+                const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+                console.log("cred",credentials);
+                await connectDb(process.env.MONGO_URI!);
+
+                if(emailRegex.test(String(credentials?.identifier))){
+                    const userAttempt = await user.findOne({email:credentials?.identifier});
+                    const passwordMatch = userAttempt.comparePassword(credentials?.password);
+                    
+                    if(passwordMatch){
+                        console.log(userAttempt);
+                        return userAttempt;
+                    }
+                
+                }else{
+                    const targetUser = await user.findOne({name:credentials?.identifier,password:credentials?.password});
+                    console.log("tuser",targetUser);
+
+                    if(targetUser)
+                        return targetUser;
+                }
                     
                 return null;
             },
@@ -50,6 +65,7 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         async session({session,token}){
+            
             if(session && session.user && token){
                 session.user.token = String(token.access_token);
             }

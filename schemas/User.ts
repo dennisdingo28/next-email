@@ -29,8 +29,17 @@ const UserSchema = new Schema<UserSchemaProps>({
     },
 });
 
-UserSchema.methods.generateJWT= (payload: UserJwtPayload) => {
+UserSchema.methods.generateJWT = function (payload: UserJwtPayload) {
     return jwt.sign(payload,process.env.JWT_ENCRYPTION!,{expiresIn:"30d"});
+}
+UserSchema.methods.comparePassword = async function (candidatePassword: string) {
+    try{
+        const match = await bcrypt.compare(candidatePassword,this.projectPassword);
+        return match;
+    }catch(err){
+        console.log(err);
+        return false;
+    }
 }
 
 UserSchema.pre('save',async function(){
