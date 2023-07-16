@@ -39,7 +39,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({className,cRef}) => {
             else toast.error(`${(err as Error).message}`)
         }
     });
-    console.log("loading",isLoading);
     
     useEffect(()=>{
         if(Object.keys(errors).length>0){
@@ -51,8 +50,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({className,cRef}) => {
           return () => clearTimeout(timer);
         }
       },[errors]);
-
-    
 
   return(
     <form className={className} onSubmit={handleSubmit((data)=>createUser(data))}>
