@@ -2,14 +2,16 @@
 import {useForm} from "react-hook-form";
 import { SignUpRequest, SignUpValidator } from "@/validators";
 import {zodResolver} from "@hookform/resolvers/zod";
-import { HTMLAttributes, useEffect,useState } from "react";
+import { HTMLAttributes,useEffect,useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import createAccount from "@/lib/createAccount";
 import {toast} from "react-hot-toast"
 
-interface SignUpFormProps extends HTMLAttributes<HTMLFormElement>{};
+interface SignUpFormProps extends HTMLAttributes<HTMLFormElement>{
+    cRef?:React.RefObject<HTMLParagraphElement>;
+};
 
-const SignUpForm: React.FC<SignUpFormProps> = ({className}) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({className,cRef}) => {
 
     const [showErrorMessage,setShowErrorMessage] = useState<boolean>(false);
 
@@ -25,9 +27,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({className}) => {
     const {mutate:createUser, isLoading} = useMutation({
         mutationFn: async (data: SignUpRequest) => await createAccount(data),
         onSuccess:(data: any)=>{
-            console.log("suc",data);
             
             toast.success(`${data.msg}`);
+            if(cRef)
+                cRef.current?.click();
         },
         onError:(err: any)=>{
             console.log((err as Error).message);

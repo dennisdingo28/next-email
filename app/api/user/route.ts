@@ -2,7 +2,7 @@ import connectDb from "@/lib/connectDb";
 import user from "@/schemas/User";
 import { SignUpValidator } from "@/validators";
 import { NextRequest, NextResponse } from "next/server";
-import { MongoAPIError, MongoServerError } from 'mongodb';
+import { MongoServerError } from 'mongodb';
 import * as z from "zod";
 
 
@@ -26,7 +26,6 @@ export async function POST(req: NextRequest){
 
         
     }catch(err: unknown){
-        console.log(err);
         
         if(err instanceof z.ZodError)
             return new NextResponse("Invalid payload format. Please try again later.",{status:400});
