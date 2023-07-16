@@ -12,7 +12,7 @@ const AuthTab:React.FC = ({}) => {
     <Tab.Group>
         <Tab.Panels>
             <Tab.Panel>
-                <LoginForm />
+                <LoginForm/>
             </Tab.Panel>
             <Tab.Panel>
                 <SignUpForm/>

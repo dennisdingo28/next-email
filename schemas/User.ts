@@ -1,11 +1,13 @@
 import { Schema,model,models } from "mongoose";
-import { UserSchemaProps, UserJwtPayload } from "@/types";
+import { UserSchemaProps, UserJwtPayload, UserRoles } from "@/types";
 import jwt from "jsonwebtoken";
+
 
 const UserSchema = new Schema<UserSchemaProps>({
     name:{
         type:String,
         required:[true,'You must provide a name'],
+        unique:true,
     },
     email:{
         type:String,
@@ -14,11 +16,16 @@ const UserSchema = new Schema<UserSchemaProps>({
     },
     password:{
         type:String,
-        required:false
+        required:false,
     },
     image:{
         type:String,
-        default:"/defaultProfile.png"
+        default:"/defaultProfile.png",
+    },
+    role:{
+        type:String,
+        enum:Object.values(UserRoles),
+        default:UserRoles.BASIC,
     },
 });
 

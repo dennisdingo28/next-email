@@ -1,3 +1,9 @@
+export enum UserRoles {
+    BASIC = "BASIC",
+    PREMIUM = "PREMIUM",
+    ENTERPRISE = "ENTERPRISE",
+}
+
 export interface NavbarLinkProps {
     label: string;
     to?: string;
@@ -8,6 +14,7 @@ export interface UserSchemaProps {
     email: string;
     password?: string;
     image: string;
+    role: UserRoles;
 }
 
 export interface UserJwtPayload {
