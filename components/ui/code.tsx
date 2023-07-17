@@ -14,7 +14,7 @@ const Code: React.FC<CodeProps> = ({code, label}) => {
   return(
     <div className="font-roboto">
         <Paragraph text={label || ""} className='font-bold text-slate-400 text-[1.1em]'/>
-        <SyntaxHighlighter className="max-h-[450px] w-[100%] h-[100%] max-w-[450px] syntax-highlighter-scrollbar" wrapLines={true} language='javascript' showLineNumbers={true} style={dracula}>
+        <SyntaxHighlighter className="max-h-[450px] w-[100%] h-[100%] max-w-[550px] syntax-highlighter-scrollbar" wrapLines={true} language='javascript' showLineNumbers={true} style={dracula}>
             {code}
         </SyntaxHighlighter>
     </div>
