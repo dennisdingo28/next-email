@@ -6,6 +6,10 @@ const navbarLinks:Array<NavbarLinkProps> = [
         to:"/",
     },
     {
+        label:"emails",
+        to:"/",
+    },
+    {
         label:"docs",
         to:"/docs",
     },

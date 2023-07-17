@@ -36,7 +36,7 @@ UserSchema.methods.generateJWT = function (payload: UserJwtPayload) {
 UserSchema.pre('save',async function(){
     try{
         const salt = await bcrypt.genSalt(10);
-        if(this.password){
+        if(this.password && this.password!==''){
             const hashedPassword = await bcrypt.hash(this.password,salt);
             this.password = hashedPassword;
         }else{

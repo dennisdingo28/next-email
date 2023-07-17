@@ -73,28 +73,27 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, account }) {
       await connectDb(process.env.MONGO_URI!);
-      const existingUser = await user.findOne({
-        name: token.name,
-        email: token.email,
-      });
-
-      if (!existingUser)
+      const existingUser = await user.findOne({ email: token.email });
+      
+      if (!existingUser) {
         await user.create({
           name: token.name,
           email: token.email,
           image: token.picture,
         });
-
+      }
+    
       const userJwt = generateJWT({
         name: token.name!,
         email: token.email!,
         image: token.picture!,
       });
-
+    
       token.access_token = userJwt;
-
+    
       return token;
     },
+    
     async session({ session, token }) {
       if (session && session.user && token) {
         session.user.token = String(token.access_token);
