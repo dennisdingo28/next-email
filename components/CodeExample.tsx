@@ -23,7 +23,7 @@ async function sendEmail(email){
    
   return (
     <div className="">
-         <Code label="Overview" code={apiExample}/>
+        <Code label="Overview" code={apiExample}/>
     </div>
   )
 }
