@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from './ui/button'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import Description from './Description'
 
 const Hero = () => {
   return (
@@ -11,6 +11,7 @@ const Hero = () => {
         <Link href={"/docs"}><Button className='flex items-center gap-2'>Docs <i className="bi bi-code-slash text-[1.1em]"></i></Button></Link>
         <Link href={"/dashboard"}><Button variant={"outline"}>Get Started</Button></Link>
       </div>
+      <Description/>
     </div>
   )
 }
