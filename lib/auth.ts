@@ -8,6 +8,9 @@ import generateJWT from "./generateJWT";
 import compareValues from "./compareBcrypt";
 
 export const authOptions: NextAuthOptions = {
+  pages:{
+    error:"/errPage",
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_CLIENTID as string,
@@ -75,14 +78,17 @@ export const authOptions: NextAuthOptions = {
       await connectDb(process.env.MONGO_URI!);
       const existingUser = await user.findOne({ email: token.email });
       
-      if (!existingUser) {
+      if(existingUser){
+        if(existingUser.name!==token.name){
+          throw new Error('Email is already taken !');
+        }
+      }else{
         await user.create({
           name: token.name,
           email: token.email,
           image: token.picture,
         });
       }
-    
       const userJwt = generateJWT({
         name: token.name!,
         email: token.email!,
@@ -90,7 +96,7 @@ export const authOptions: NextAuthOptions = {
       });
     
       token.access_token = userJwt;
-    
+
       return token;
     },
     
