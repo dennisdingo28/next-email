@@ -2,9 +2,13 @@ import AuthTab from "./AuthTab"
 import LoginProviders from "./LoginProviders"
 import Modal from "./ui/modal"
 
-const AuthModal: React.FC = () => {
+interface AuthModalProps {
+  open: boolean;
+  setIsOpen: (open: boolean) =>void;
+}
+const AuthModal: React.FC<AuthModalProps> = ({open,setIsOpen}) => {
   return(
-    <Modal modalTitle="Sign in with your account" modalDescription="Authenticate and unleash the power of NextEmail">
+    <Modal isOpen={open} setOpen={setIsOpen} modalTitle="Sign in with your account" modalDescription="Authenticate and unleash the power of NextEmail">
         <LoginProviders/>
         <div className="flex items-center justify-center my-3">
             <span className="text-center text-slate-400">or</span>

@@ -1,21 +1,23 @@
 "use client"
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
+import useAuthModal from '@/hooks/useAuthModal';
 
 interface ModalProps {
     modalTitle: string;
     modalDescription?: string;
     children?: React.ReactNode;
+    isOpen: boolean;
+    setOpen: (open: boolean) =>void;
 }
 
-const Modal: React.FC<ModalProps> = ({modalTitle,modalDescription,children}) => {
-    const [isOpen, setIsOpen] = useState(true);
+const Modal: React.FC<ModalProps> = ({modalTitle,modalDescription,children,isOpen,setOpen}) => {
 
 
   return (
     <Dialog
       open={isOpen}
-      onClose={() => setIsOpen(false)}
+      onClose={() => setOpen(false)}
       className="relative z-50"
     >
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
@@ -26,7 +28,7 @@ const Modal: React.FC<ModalProps> = ({modalTitle,modalDescription,children}) => 
             <Dialog.Title className='text-[1.3em] font-medium text-white'>
               {modalTitle}
             </Dialog.Title>
-            <i className="ml-auto bi bi-x-lg hover:text-purple-600 text-white cursor-pointer text-[1.1em] duration-75" onClick={()=>setIsOpen(false)}></i>
+            <i className="ml-auto bi bi-x-lg hover:text-purple-600 text-white cursor-pointer text-[1.1em] duration-75" onClick={()=>setOpen(false)}></i>
           </div>  
           <div className="">
             <Dialog.Description className='text-slate-400 mt-1 mb-3 text-[.85em]'>

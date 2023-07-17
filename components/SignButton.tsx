@@ -1,10 +1,15 @@
 "use client"
 import { Button } from "./ui/button"
-import {signIn} from "next-auth/react";
+import AuthModal from "./AuthModal";
+import useAuthModal from "@/hooks/useAuthModal";
 
 const SignButton = () => {
+  const {open,setIsOpen} = useAuthModal();
   return (
-    <Button variant={'outline'} onClick={()=>signIn("google")} className='text-white tracking-wide'>sign in</Button>
+    <>
+      <AuthModal open={open} setIsOpen={setIsOpen}/>
+      <Button variant={'outline'} onClick={()=>setIsOpen(true)} className='tracking-wide'>sign in</Button>
+    </>
   )
 }
 

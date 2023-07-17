@@ -8,11 +8,9 @@ import AuthModal from './AuthModal'
 
 const Navbar: React.FC = async () => {
   const session = await getAuthSession();
-  console.log(session);
   
   return(
     <nav className='flex flex-col xs:flex-row items-center justify-center gap-6 xs:gap-12 py-4 border-b border-b-slate-700 font-roboto'>
-        <AuthModal/>
         <div className='flex items-center gap-14 xs:gap-8'>
             {navbarLinks.map(link=>(
                 <NavbarLink key={link.label} {...link}/>
@@ -20,8 +18,8 @@ const Navbar: React.FC = async () => {
         </div>
         <div className="flex items-center gap-10 xs:gap-8">
             <ThemeToggler/>
+            {!session?.user ? <SignButton/>:<UserProfile imageUrl={`${session?.user?.image}`} label={`${session?.user?.name}`}/>}
         </div>
-        {!session?.user ? <SignButton/>:<UserProfile imageUrl={`${session?.user?.image}`} label={`${session?.user?.name}`}/>}
     </nav>
   )
 }
