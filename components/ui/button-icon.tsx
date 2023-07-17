@@ -8,7 +8,7 @@ interface ButtonIconProps {
 }
 
 const ButtonIcon: FC<ButtonIconProps> = ({icon,onClick,className}) => {
-  return <button onClick={onClick} className={cn('bg-transparent border-2 border-slate-600',className)}>{icon}</button>
+  return <button onClick={onClick} className={cn('bg-transparent border-2 border-slate-600 p-2',className)}>{icon}</button>
 }
 
 export default ButtonIcon

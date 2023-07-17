@@ -5,6 +5,7 @@ import {cookies} from "next/headers";
 import Container from '@/components/ui/container';
 import AuthProvider from '@/components/AuthProvider';
 import ToasterProivder from '@/providers/toast-provider';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'NextEmail',
@@ -28,6 +29,7 @@ export default function RootLayout({
           <Container>
             <Navbar/>
             {children}
+            <Footer/>
           </Container>
           <ToasterProivder/>
         </AuthProvider>

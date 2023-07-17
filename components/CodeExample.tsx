@@ -1,8 +1,12 @@
 "use client"
 import { useOrigin } from "@/hooks/useOrigin";
 import Code from "./ui/code"
+import { HTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
-const CodeExample = () => {
+interface CodeExampleProps extends HTMLAttributes<HTMLDivElement>{};
+
+const CodeExample: React.FC<CodeExampleProps> = ({className}) => {
     const origin = useOrigin();
     console.log(origin);
     
@@ -12,6 +16,7 @@ async function sendEmail(email){
     try{
         const emailResponse = await axios.post("${origin}/api/[api_key]/[template_id]/sendEmail",{
             to:"testemail@gmail.com",
+            title:"Hello there",
             description:"this is a test email"
         });
     }catch(err){
@@ -22,7 +27,7 @@ async function sendEmail(email){
     
    
   return (
-    <div className="">
+    <div className={cn(className)}>
         <Code label="Overview" code={apiExample}/>
     </div>
   )
