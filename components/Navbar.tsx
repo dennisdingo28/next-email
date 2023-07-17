@@ -12,7 +12,6 @@ const Navbar: React.FC = async () => {
   
   return(
     <nav className='flex flex-col xs:flex-row items-center justify-center gap-6 xs:gap-12 py-4 border-b border-b-slate-700 font-roboto'>
-        <AuthModal/>
         <div className='flex items-center gap-14 xs:gap-8'>
             {navbarLinks.map(link=>(
                 <NavbarLink key={link.label} {...link}/>

@@ -33,14 +33,12 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        console.log("cred", credentials);
         await connectDb(process.env.MONGO_URI!);
 
         if (emailRegex.test(String(credentials?.identifier))) {
           const userAttempt = await user.findOne({
             email: credentials?.identifier,
           });
-          console.log(userAttempt);
 
           if (!userAttempt)
             throw new Error(
@@ -48,7 +46,6 @@ export const authOptions: NextAuthOptions = {
             );
 
             const passwordMatch = await compareValues(String(credentials?.password),userAttempt.password);
-            console.log('pm',passwordMatch);
             
           if (passwordMatch) {
             
@@ -59,12 +56,12 @@ export const authOptions: NextAuthOptions = {
           const userAttempt = await user.findOne({
             name: credentials?.identifier,
           });
-          const passwordMatch = userAttempt.comparePassword(
-            credentials?.password
+          const passwordMatch = await compareValues(
+            String(credentials?.password),
+            userAttempt.password
           );
 
           if (passwordMatch) {
-            console.log(userAttempt);
             return userAttempt;
           }
           throw new Error(`Password doesn't match !`);
