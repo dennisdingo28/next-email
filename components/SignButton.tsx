@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "./ui/button"
-import {signIn} from "next-auth/react";
 import AuthModal from "./AuthModal";
 import useAuthModal from "@/hooks/useAuthModal";
 
@@ -9,7 +8,7 @@ const SignButton = () => {
   return (
     <>
       <AuthModal open={open} setIsOpen={setIsOpen}/>
-      <Button variant={'outline'} onClick={()=>setIsOpen(true)} className='text-white tracking-wide'>sign in</Button>
+      <Button variant={'outline'} onClick={()=>setIsOpen(true)} className='tracking-wide'>sign in</Button>
     </>
   )
 }
