@@ -48,7 +48,6 @@ export const authOptions: NextAuthOptions = {
             );
 
             const passwordMatch = await compareValues(String(credentials?.password),userAttempt.password);
-            console.log('pm',passwordMatch);
             
           if (passwordMatch) {
             
