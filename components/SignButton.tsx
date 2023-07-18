@@ -10,8 +10,9 @@ const SignButton = () => {
   const {open,setIsOpen} = useAuthModal();
   const params = useSearchParams();
   const authModal = params.get('authModal');
-
-  if(authModal){
+  console.log("am",authModal);
+  
+  if(authModal?.trim()!=='' && authModal){
     setIsOpen(true);
     router.push('/');
   }

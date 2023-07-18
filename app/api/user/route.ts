@@ -4,6 +4,7 @@ import { SignUpValidator } from "@/validators";
 import { NextRequest, NextResponse } from "next/server";
 import { MongoServerError } from 'mongodb';
 import * as z from "zod";
+import generateApiKey from "@/lib/generateApiKey";
 
 
 export async function POST(req: NextRequest){
@@ -26,7 +27,8 @@ export async function POST(req: NextRequest){
         if(existingUser)
             throw new Error(`An account with email ${existingUser.email} already exists !`);
         
-        const newUser = await user.create(data);
+        const apiKey = generateApiKey();
+        const newUser = await user.create({...data,apiKey:String(apiKey)});
 
         return NextResponse.json({msg:"Account was successfully created !"},{status:200});
 

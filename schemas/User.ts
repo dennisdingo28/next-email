@@ -2,6 +2,7 @@ import { Schema,model,models } from "mongoose";
 import { UserSchemaProps, UserJwtPayload, UserRoles } from "@/types";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
+import generateApiKey from "@/lib/generateApiKey";
 
 const UserSchema = new Schema<UserSchemaProps>({
     name:{
@@ -21,6 +22,10 @@ const UserSchema = new Schema<UserSchemaProps>({
     image:{
         type:String,
         default:"/defaultProfile.png",
+    },
+    apiKey:{
+        type:String,
+        required:[true,'The api key was not provided. Please try again later.'],
     },
     role:{
         type:String,
@@ -42,6 +47,7 @@ UserSchema.pre('save',async function(){
         }else{
             throw new Error("Password is empty");
         }
+    
     }catch(err){
         console.log(err);
     }

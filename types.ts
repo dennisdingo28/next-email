@@ -14,6 +14,7 @@ export interface UserSchemaProps {
     email: string;
     password?: string;
     image: string;
+    apiKey: string;
     role: UserRoles;
 }
 

@@ -6,6 +6,7 @@ import user from "@/schemas/User";
 import connectDb from "./connectDb";
 import generateJWT from "./generateJWT";
 import compareValues from "./compareBcrypt";
+import generateApiKey from "./generateApiKey";
 
 export const authOptions: NextAuthOptions = {
   pages:{
@@ -84,10 +85,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email is already taken !');
         }
       }else{
+        const apiKey = generateApiKey();
         await user.create({
           name: token.name,
           email: token.email,
           image: token.picture,
+          apiKey: String(apiKey),
         });
       }
       const userJwt = generateJWT({
