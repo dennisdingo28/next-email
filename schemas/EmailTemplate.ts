@@ -3,13 +3,9 @@ import { EmailTemplateSchemaProps } from "@/types";
 
 
 const EmailTemplateSchema = new Schema<EmailTemplateSchemaProps>({
-    headerColor:{
-        type: String,
-        required:[true,'You must provide a header color'],
-    },
-    bodyColor:{
-        type: String,
-        required:[true,'You must provide a body color'],
+    html:{
+        type:String,
+        required:[true,'You must provide a valid template html schema'],
     }
 });
 

@@ -6,8 +6,8 @@ import user from "@/schemas/User";
 export async function POST(req: NextRequest){
     try{
         const data = await req.json();
-      
-        if(Object.keys(data.template).length===0 || !data.template.headerColor || !data.template.bodyColor)
+                
+        if(!data || !data.htmlContent || !data.htmlContent.html || Object.keys(data.htmlContent.html).length===0)
             return new NextResponse('Invalid payload format.',{status:400});
         if(!data.access_token || data.access_token.trim()==='')
             return new NextResponse('No access token was provided',{status:401});
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest){
         if(authorizedUser.role!=='ADMIN')
             throw new Error('You are not an admin.')
             
-        await emailTemplate.create(data.template);
+        await emailTemplate.create({html:String(data.htmlContent.html)});
         
         return NextResponse.json({msg:"Template was successfully created!"});
     }catch(err){

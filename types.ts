@@ -28,8 +28,7 @@ export interface EmailSchemaProps {
 }
 
 export interface EmailTemplateSchemaProps {
-   headerColor: string;
-   bodyColor: string;
+   html: string;
 }
 
 export interface UserJwtPayload {

@@ -2,6 +2,9 @@ import user from "@/schemas/User";
 import { NextRequest, NextResponse } from "next/server";
 import jwt, {JsonWebTokenError, JwtPayload} from "jsonwebtoken";
 import nodemailer from "nodemailer";
+import fs from "fs";
+import handlebars from "handlebars";
+import path from "path";
 
 export async function POST(req: NextRequest,{params}:{params:{api_key: string, template_id: string}}){
     try{
@@ -34,12 +37,14 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string, t
                 pass:process.env.NODEMAILER_PASSWORD,
             }
         })
-
+        const templatePath = path.join(__dirname,'/next-email/templates')
+        const templateSource = fs.readFileSync(templatePath,'utf-8');
+        const template = handlebars.compile(templateSource);
         const mailOptions = {
             from:authorizedUser.email,
             to:payload.to,
             subject:payload.title,
-            html:`<h1 style="color:red">sent with next email</h1>`
+            html:template({name:payload.to})
         }
         await transporter.sendMail(mailOptions);
 
