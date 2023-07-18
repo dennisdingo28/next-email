@@ -1,7 +1,7 @@
 import user from "@/schemas/User";
 import { NextRequest, NextResponse } from "next/server";
 import jwt, {JsonWebTokenError, JwtPayload} from "jsonwebtoken";
-
+import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest,{params}:{params:{api_key: string, template_id: string}}){
     try{
@@ -25,6 +25,23 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string, t
             throw new Error('Cannot find any user with the provided credentials. Please try again later.');
 
         console.log(authorizedUser);
+
+        //nodemailer
+        const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:process.env.NODEMAILER_EMAIL,
+                pass:process.env.NODEMAILER_PASSWORD,
+            }
+        })
+
+        const mailOptions = {
+            from:authorizedUser.email,
+            to:payload.to,
+            subject:payload.title,
+            html:`<h1 style="color:red">sent with next email</h1>`
+        }
+        await transporter.sendMail(mailOptions);
 
         return NextResponse.json({msg:'Email was successfully sent.'});
     }catch(err){
