@@ -7,7 +7,7 @@ const navbarLinks:Array<NavbarLinkProps> = [
     },
     {
         label:"emails",
-        to:"/",
+        to:"/emails",
     },
     {
         label:"docs",

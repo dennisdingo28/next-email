@@ -9,6 +9,7 @@ import compareValues from "./compareBcrypt";
 
 export const authOptions: NextAuthOptions = {
   pages:{
+    signIn:"/?authModal=true",
     error:"/errPage",
   },
   providers: [
