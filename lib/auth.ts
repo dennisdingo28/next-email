@@ -7,11 +7,11 @@ import connectDb from "./connectDb";
 import generateJWT from "./generateJWT";
 import compareValues from "./compareBcrypt";
 import generateApiKey from "./generateApiKey";
+import { UserRoles } from "@/types";
 
 export const authOptions: NextAuthOptions = {
   pages:{
     signIn:"/?authModal=true",
-    error:"/errPage",
   },
   providers: [
     GithubProvider({

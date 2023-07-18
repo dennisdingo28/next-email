@@ -1,8 +1,7 @@
-import { Schema,model,models } from "mongoose";
+import mongoose, { Schema,model,models } from "mongoose";
 import { UserSchemaProps, UserJwtPayload, UserRoles } from "@/types";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
-import generateApiKey from "@/lib/generateApiKey";
 
 const UserSchema = new Schema<UserSchemaProps>({
     name:{
@@ -27,6 +26,10 @@ const UserSchema = new Schema<UserSchemaProps>({
         type:String,
         required:[true,'The api key was not provided. Please try again later.'],
     },
+    sentEmails:[{
+        type:mongoose.Types.ObjectId,
+        ref:'Email'
+    }],
     role:{
         type:String,
         enum:Object.values(UserRoles),
@@ -34,9 +37,6 @@ const UserSchema = new Schema<UserSchemaProps>({
     },
 });
 
-UserSchema.methods.generateJWT = function (payload: UserJwtPayload) {
-    return jwt.sign(payload,process.env.JWT_ENCRYPTION!,{expiresIn:"30d"});
-}
 
 UserSchema.pre('save',async function(){
     try{

@@ -5,7 +5,6 @@ export default function generateApiKey(){
 
     const buffer = crypto.randomBytes(apiKeyLength);
     const apiKey = buffer.toString('hex');
-    console.log(apiKey);
     
     return apiKey;
 }

@@ -2,6 +2,7 @@ export enum UserRoles {
     BASIC = "BASIC",
     PREMIUM = "PREMIUM",
     ENTERPRISE = "ENTERPRISE",
+    ADMIN = "ADMIN"
 }
 
 export interface NavbarLinkProps {
@@ -15,7 +16,20 @@ export interface UserSchemaProps {
     password?: string;
     image: string;
     apiKey: string;
+    sentEmails: Array<any>;
     role: UserRoles;
+}
+
+export interface EmailSchemaProps {
+    to: string;
+    title: string;
+    description: string;
+    template_id: EmailTemplateSchemaProps;
+}
+
+export interface EmailTemplateSchemaProps {
+   headerColor: string;
+   bodyColor: string;
 }
 
 export interface UserJwtPayload {
