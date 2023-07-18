@@ -2,7 +2,6 @@ import emailTemplate from "@/schemas/EmailTemplate";
 import { NextRequest, NextResponse } from "next/server";
 import jwt, { JsonWebTokenError, JwtPayload } from "jsonwebtoken";
 import user from "@/schemas/User";
-import { UserRoles } from "@/types";
 
 export async function POST(req: NextRequest){
     try{
@@ -16,10 +15,9 @@ export async function POST(req: NextRequest){
         const decodedInfo = jwt.verify(data.access_token,process.env.JWT_ENCRYPTION!);
         
         const authorizedUser = await user.findOne({name:(decodedInfo as JwtPayload).name ,email:(decodedInfo as JwtPayload).email});
-        console.log(authorizedUser);
         
         if(authorizedUser.role!=='ADMIN')
-            throw new Error('You are not an admin')
+            throw new Error('You are not an admin.')
             
         await emailTemplate.create(data.template);
         
