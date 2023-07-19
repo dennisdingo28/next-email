@@ -6,7 +6,7 @@ interface LargeHeadingProps extends HTMLAttributes<HTMLHeadingElement>{
 }
 
 const LargeHeading: React.FC<LargeHeadingProps> = ({text,className}) => {
-  return <h2 className={cn("text-[1.5em] font-roboto text-gray-300",className)}>{text}</h2>
+  return <h2 className={cn("text-[1.5em] font-roboto text-gray-800 dark:text-gray-300",className)}>{text}</h2>
 }
 
 export default LargeHeading

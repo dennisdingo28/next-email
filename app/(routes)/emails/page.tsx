@@ -1,10 +1,13 @@
-import LargeHeading from "@/components/ui/LargeHeading"
+import EmailDiscover from "@/components/EmailDiscover"
+import EmailHero from "@/components/EmailHero"
 
 const EmailsPage = () => {
 
   return (
     <div className="mt-16">
-      <LargeHeading text="Start sending emails within seconds"/>
+      <EmailHero/>
+      <p className="mb-10">email tool</p>
+      <EmailDiscover/>
     </div>
   )
 }

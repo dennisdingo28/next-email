@@ -20,6 +20,12 @@ export interface UserSchemaProps {
     role: UserRoles;
 }
 
+export interface UserProfile {
+    name?: string;
+    email?: string;
+    _id?: string;
+}
+
 export interface EmailSchemaProps {
     to: string;
     title: string;

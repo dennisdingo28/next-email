@@ -7,7 +7,7 @@ interface ParagraphProps extends HTMLAttributes<HTMLParagraphElement>{
 
 const Paragraph: React.FC<ParagraphProps> = ({text,className}) => {
   return (
-    <p className={cn("text-slate-500 font-light",className)}>{text}</p>
+    <p className={cn("text-slate-500 font-light font-roboto",className)}>{text}</p>
   )
 }
 
