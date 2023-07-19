@@ -1,37 +1,17 @@
+<!DOCTYPE html>
 <html lang='en'>
-    <style>
-        /* Custom CSS styles for the email template */
-        *{
-          padding: 0;
-          margin: 0;
-        }
-        h1 {
-          color: gainsboro;
-          text-align: center;
-        }
-        p {
-          color: #0000ff;
-        }
-        .emailWrapper{
-          height: 100%;
-          min-height: 100vh;
-          width: 100%;
-          min-width: 100vw;
-          background-color: #1c1b1b;
-        }
-        .emailContentWrapper p{
-          color: blueviolet;
-          
-        }
-      </style>
-
-<body>
-  <div class='emailWrapper'>
-    <h1>This was sent with NextEmail (title)</h1>
-    <div class='emailContentWrapper'>
-      <p>This is a custom email template example. (description)</p>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>{{subject}}</title>
+</head>
+<body style='margin: 0; padding: 0; font-family: Arial, sans-serif;'>
+  <div style='max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;'>
+    <h1 style='color: #1c1b1b; text-align: center;'>{{title}}</h1>
+    <p style='color: #333333;'>{{description}}</p>
+    <div style='display: flex; align-items: center; justify-content: center;'>
+        <a href={{buttonLink}} style="cursor: pointer"><button style='background-color: black; color: white; border-radius: 10px; padding: 10px; border:none; cursor: pointer;'>{{buttonText}}</button></a>
     </div>
   </div>
-   
 </body>
 </html>

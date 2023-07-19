@@ -2,24 +2,20 @@ import user from "@/schemas/User";
 import { NextRequest, NextResponse } from "next/server";
 import jwt, {JsonWebTokenError, JwtPayload} from "jsonwebtoken";
 import nodemailer from "nodemailer";
-import fs from "fs";
 import handlebars from "handlebars";
-import path from "path";
+import emailTemplate from "@/schemas/EmailTemplate";
 
-export async function POST(req: NextRequest,{params}:{params:{api_key: string, template_id: string}}){
+export async function POST(req: NextRequest,{params}:{params:{api_key: string}}){
     try{
         const payload = await req.json();
         const apiKey = params.api_key;
-        const templateId = params.template_id;
 
         if(!payload || Object.keys(payload).length===0)
             throw new Error('No payload was received. Please try again later.');
         if(!apiKey || apiKey.trim()==='')
             throw new Error('No api key was provided. Please try again later.');
-        if(!templateId || templateId.trim()==='')
+        if(!payload.templateId ||   payload.templateId.trim()==='')
             throw new Error('No template id was provided. Please try again later.');
-
-        console.log(payload,apiKey,templateId);
         
         const decodedInfo = jwt.verify(payload.access_token,process.env.JWT_ENCRYPTION!);
         const authorizedUser = await user.findOne({name:(decodedInfo as JwtPayload).name ,email:(decodedInfo as JwtPayload).email,apiKey});
@@ -29,6 +25,11 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string, t
 
         console.log(authorizedUser);
 
+        const email_template = await emailTemplate.findById({_id:payload.templateId}); 
+        if(!email_template)
+            throw new Error(`Cannot find any template with id: ${payload.templateId}`);
+        console.log(email_template);
+        
         //nodemailer
         const transporter = nodemailer.createTransport({
             service:"gmail",
@@ -37,14 +38,13 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string, t
                 pass:process.env.NODEMAILER_PASSWORD,
             }
         })
-        const templatePath = path.join(__dirname,'/next-email/templates')
-        const templateSource = fs.readFileSync(templatePath,'utf-8');
-        const template = handlebars.compile(templateSource);
+    
+        const template = handlebars.compile(email_template.html);
         const mailOptions = {
             from:authorizedUser.email,
-            to:payload.to,
-            subject:payload.title,
-            html:template({name:payload.to})
+            to:payload.email.to,
+            subject:payload.email.title,
+            html:template({...payload.email})
         }
         await transporter.sendMail(mailOptions);
 
