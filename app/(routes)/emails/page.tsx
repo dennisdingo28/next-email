@@ -1,8 +1,10 @@
+import LargeHeading from "@/components/ui/LargeHeading"
 
 const EmailsPage = () => {
+
   return (
-    <div>
-      emails here
+    <div className="mt-16">
+      <LargeHeading text="Start sending emails within seconds"/>
     </div>
   )
 }

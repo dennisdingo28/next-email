@@ -6,6 +6,10 @@ const EmailTemplateSchema = new Schema<EmailTemplateSchemaProps>({
     html:{
         type:String,
         required:[true,'You must provide a valid template html schema'],
+    },
+    clientHtml:{
+        type: String,
+        required:[true,'You must provide a valid client html schema'],
     }
 });
 

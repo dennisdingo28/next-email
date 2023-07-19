@@ -19,7 +19,7 @@ export async function POST(req: NextRequest){
         if(authorizedUser.role!=='ADMIN')
             throw new Error('You are not an admin.')
             
-        await emailTemplate.create({html:String(data.htmlContent.html)});
+        await emailTemplate.create({...data.htmlContent});
         
         return NextResponse.json({msg:"Template was successfully created!"});
     }catch(err){

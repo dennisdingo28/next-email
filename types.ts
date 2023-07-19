@@ -29,6 +29,7 @@ export interface EmailSchemaProps {
 
 export interface EmailTemplateSchemaProps {
    html: string;
+   clientHtml: string;
 }
 
 export interface UserJwtPayload {
