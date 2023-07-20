@@ -20,11 +20,9 @@ const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({temp
         to:"dennismoldovan32@gmail.com",
         subject:"this is from next email",
         description:"lorem ipsum dolorem itum",
-        buttonLink:"http://localhost:3000/",
-        buttonText:"Visit Our Website",
         ...properties,
       },
-      templateId:"64b9704b844b5171e0aa7518",
+      templateId:"64b97317844b5171e0aa762d",
       access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGVubmlzIE1vbGRvdmFuIiwiZW1haWwiOiJkZW5uaXNtb2xkb3ZhbjMyQGdtYWlsLmNvbSIsImltYWdlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUZHTTZrbEpRaC1aOEtFd0lfbzRHdWk2T2VzNnM0aTYxTENYcGhzMzF5PXM5Ni1jIiwiaWF0IjoxNjg5ODczMDU2LCJleHAiOjE2OTI0NjUwNTZ9.1pWQpaooEVP0O4mtxa-i_ZVBHkx51bxM59eGLqbBIQ8"
     })
    }
