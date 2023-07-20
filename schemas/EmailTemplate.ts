@@ -1,6 +1,5 @@
-import { Schema,model,models } from "mongoose";
+import mongoose,{ Schema, model, models } from "mongoose";
 import { EmailTemplateSchemaProps } from "@/types";
-import { EmailColor } from "@/types";
 
 const EmailTemplateSchema = new Schema<EmailTemplateSchemaProps>({
     html:{
@@ -18,6 +17,6 @@ const EmailTemplateSchema = new Schema<EmailTemplateSchemaProps>({
 });
 
 
-const emailTemplate = models.EmailTemplate || model("EmailTemplate",EmailTemplateSchema);
+const emailTemplate = models.emailtemplates || model("emailtemplates",EmailTemplateSchema);
 
 export default emailTemplate;

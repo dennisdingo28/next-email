@@ -28,7 +28,7 @@ const UserSchema = new Schema<UserSchemaProps>({
     },
     sentEmails:[{
         type:mongoose.Types.ObjectId,
-        ref:'Email'
+        ref:'emails'
     }],
     role:{
         type:String,
@@ -53,6 +53,6 @@ UserSchema.pre('save',async function(){
     }
 })
 
-const user = models.User || model("User",UserSchema);
+const user = models.users || model("users",UserSchema);
 
 export default user;

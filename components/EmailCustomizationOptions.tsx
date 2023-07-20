@@ -2,14 +2,15 @@
 import { EmailTemplateSchemaProps } from "@/types";
 import EmailCustomizationField from "./ui/EmailCustomization-Field";
 import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 interface EmailCustomizationOptionsProps {
     template: EmailTemplateSchemaProps;
+    colors: any;
+    setColors: Dispatch<SetStateAction<any>>;
 }
 
-const EmailCustomizationOptions: React.FC<EmailCustomizationOptionsProps> = ({template}) => {
-    console.log('fp',template);
-    const [colors,setColors] = useState<any>(template.colors);
+const EmailCustomizationOptions: React.FC<EmailCustomizationOptionsProps> = ({template,colors,setColors}) => {
 
   return (
     <div>
