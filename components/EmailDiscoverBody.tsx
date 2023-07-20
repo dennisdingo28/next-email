@@ -3,7 +3,6 @@ import EmailTemplate from "./ui/EmailTemplate";
 
 const EmailDiscoverBody = async () => {
     const templates = await getTemplates();
-    console.log(templates);
     
   return (
     <div>

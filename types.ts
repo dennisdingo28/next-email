@@ -36,6 +36,11 @@ export interface EmailSchemaProps {
 export interface EmailTemplateSchemaProps {
    html: string;
    clientHtml: string;
+   colors: object;
+}
+
+export interface EmailColor {
+    [key: string]: string;
 }
 
 export interface UserJwtPayload {
