@@ -4,9 +4,10 @@ import { HTMLAttributes } from "react"
 interface EmailTemplateProps extends HTMLAttributes<HTMLDivElement>{
     clientHtml: string;
     properties: any;
+    id?: string;
 }
 
-const EmailTemplate: React.FC<EmailTemplateProps> = ({clientHtml,properties, className}) => {
+const EmailTemplate: React.FC<EmailTemplateProps> = ({clientHtml,properties, className, id}) => {
   console.log("et",properties);
   
   const replacePlaceholders = (templateHtml:any, templateProperties:any) => {
