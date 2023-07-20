@@ -36,7 +36,7 @@ export interface EmailSchemaProps {
 export interface EmailTemplateSchemaProps {
    html: string;
    clientHtml: string;
-   colors: object;
+   properties: object;
 }
 
 export interface EmailColor {

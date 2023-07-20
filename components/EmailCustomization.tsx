@@ -1,9 +1,8 @@
 import getTemplate from "@/actions/getTemplate"
 import EmailCustomizationFields from "./ui/EmailCustomization-Fields";
-import EmailTemplate from "./ui/EmailTemplate";
 
 const EmailCustomization: React.FC = async () => {
-    const emailTemplate = await getTemplate("64b95ba93db32fa932c85a16");
+    const emailTemplate = await getTemplate("64b9704b844b5171e0aa7518");
     
   return (
     <div>

@@ -11,20 +11,31 @@ interface EmailCustomizationFieldsProps {
 }
 
 const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({template}) => {
-   const [colors,setColors] = useState(template.colors);
-   console.log(colors);
+   const [properties,setProperties] = useState(template.properties);
+   console.log(properties);
 
    async function sendMail(){
-    await axios.post('/api/sendEmail/99791bb12fcc95d5115c4141b3507b')
+    await axios.post('/api/sendEmail/99791bb12fcc95d5115c4141b3507b',{
+      email:{
+        to:"dennismoldovan32@gmail.com",
+        subject:"this is from next email",
+        description:"lorem ipsum dolorem itum",
+        buttonLink:"http://localhost:3000/",
+        buttonText:"Visit Our Website",
+        ...properties,
+      },
+      templateId:"64b9704b844b5171e0aa7518",
+      access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGVubmlzIE1vbGRvdmFuIiwiZW1haWwiOiJkZW5uaXNtb2xkb3ZhbjMyQGdtYWlsLmNvbSIsImltYWdlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUZHTTZrbEpRaC1aOEtFd0lfbzRHdWk2T2VzNnM0aTYxTENYcGhzMzF5PXM5Ni1jIiwiaWF0IjoxNjg5ODczMDU2LCJleHAiOjE2OTI0NjUwNTZ9.1pWQpaooEVP0O4mtxa-i_ZVBHkx51bxM59eGLqbBIQ8"
+    })
    }
    
   return <div>
       <Paragraph text="Change" className="text-[1.1em]"/>
       <div className="flex items-center">
-        <EmailCustomizationOptions template={template} colors={colors} setColors={setColors}/>
-        <EmailTemplate colors={colors} clientHtml={template.clientHtml} className="flex-1"/>
+        <EmailCustomizationOptions template={template} properties={properties} setProperties={setProperties}/>
+        <EmailTemplate properties={properties} clientHtml={template.clientHtml} className="flex-1"/>
       </div>
-      <button>Send Mail</button>
+      <button onClick={sendMail}>Send Mail</button>
   </div>
 }
 
