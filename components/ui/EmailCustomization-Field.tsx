@@ -10,7 +10,8 @@ interface EmailCustomizationFieldProps {
 
 const EmailCustomizationField: React.FC<EmailCustomizationFieldProps> = ({prop,value,colors,setColors}) => {
     const isColor = isValidColor(value);
-        
+    console.log(value);
+    
         return <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
                 <p className="text-gray-400">{prop}: </p>

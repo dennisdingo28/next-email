@@ -17,11 +17,11 @@ const EmailSchema = new Schema<EmailSchemaProps>({
     },
     template_id:{
         type: mongoose.Types.ObjectId,
-        ref:"emailtemplates",
+        ref:"EmailTemplate",
     },
 });
 
 
-const email = models.emails|| model("emails",EmailSchema);
+const email = models.Email|| model("Email",EmailSchema);
 
 export default email;

@@ -1,11 +1,10 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react"
 
 interface EmailTemplateProps extends HTMLAttributes<HTMLDivElement>{
     clientHtml: string;
-    _id: string;
 }
 
-const EmailTemplate: React.FC<EmailTemplateProps> = ({clientHtml,_id,className}) => {
+const EmailTemplate: React.FC<EmailTemplateProps> = ({clientHtml, className}) => {
   return(
     <div className={className} dangerouslySetInnerHTML={{__html:clientHtml}}></div>
   )
