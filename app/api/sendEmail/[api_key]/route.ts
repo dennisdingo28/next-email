@@ -39,11 +39,11 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
             }
         })
     
-        const template = handlebars.compile(email_template.html);
+        const template = handlebars.compile(email_template.clientHtml);
         const mailOptions = {
             from:authorizedUser.email,
             to:payload.email.to,
-            subject:payload.email.title,
+            subject:payload.email.subject,
             html:template({...payload.email})
         }
         await transporter.sendMail(mailOptions);
