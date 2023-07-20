@@ -4,7 +4,7 @@ import EmailCustomizationField from "./ui/EmailCustomization-Field";
 import { Dispatch, SetStateAction, useState } from "react";
 
 interface EmailCustomizationOptionsProps {
-    template: EmailTemplateSchemaProps;
+    template: EmailTemplateSchemaProps & { _id: string };
     properties: any;
     setProperties: Dispatch<SetStateAction<any>>;
 }
