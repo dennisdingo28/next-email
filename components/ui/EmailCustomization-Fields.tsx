@@ -27,7 +27,6 @@ const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({temp
           ...properties,
         },
         templateId:selectedTemplate.id,
-        access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGVubmlzIE1vbGRvdmFuIiwiZW1haWwiOiJkZW5uaXNtb2xkb3ZhbjMyQGdtYWlsLmNvbSIsImltYWdlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0ZUZHTTZrbEpRaC1aOEtFd0lfbzRHdWk2T2VzNnM0aTYxTENYcGhzMzF5PXM5Ni1jIiwiaWF0IjoxNjg5ODczMDU2LCJleHAiOjE2OTI0NjUwNTZ9.1pWQpaooEVP0O4mtxa-i_ZVBHkx51bxM59eGLqbBIQ8"
       });
       toast.success('Email was successfully sent !');
       setLoading(false);

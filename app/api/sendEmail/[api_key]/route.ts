@@ -20,8 +20,7 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
         if(!payload.templateId || payload.templateId.trim()==='')
             throw new Error('No template id was provided. Please try again later.');
         
-        const decodedInfo = jwt.verify(payload.access_token,process.env.JWT_ENCRYPTION!);
-        const authorizedUser = await user.findOne({name:(decodedInfo as JwtPayload).name ,email:(decodedInfo as JwtPayload).email,apiKey});
+        const authorizedUser = await user.findOne({apiKey});
         
         if(!authorizedUser)
             throw new Error('Cannot find any user with the provided credentials. Please try again later.');
@@ -53,7 +52,7 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
         
         const newEmail = await email.create({template_id:payload.templateId});
 
-        const updatedUser = await user.findOneAndUpdate({name:(decodedInfo as JwtPayload).name ,email:(decodedInfo as JwtPayload).email,apiKey},{$push:{sentEmails:newEmail._id}},{new:true,runValidators:true});
+        await user.findOneAndUpdate({apiKey},{$push:{sentEmails:newEmail._id}},{new:true,runValidators:true});
 
         return NextResponse.json({msg:'Email was successfully sent.'});
     }catch(err){
