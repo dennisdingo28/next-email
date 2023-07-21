@@ -4,6 +4,7 @@ import jwt, {JsonWebTokenError, JwtPayload} from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import handlebars from "handlebars";
 import emailTemplate from "@/schemas/EmailTemplate";
+import email from "@/schemas/Email";
 
 export async function POST(req: NextRequest,{params}:{params:{api_key: string}}){
     try{
@@ -49,6 +50,10 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
             html:template({...payload.email})
         }
         await transporter.sendMail(mailOptions);
+        
+        const newEmail = await email.create({template_id:payload.templateId});
+
+        const updatedUser = await user.findOneAndUpdate({name:(decodedInfo as JwtPayload).name ,email:(decodedInfo as JwtPayload).email,apiKey},{$push:{sentEmails:newEmail._id}},{new:true,runValidators:true});
 
         return NextResponse.json({msg:'Email was successfully sent.'});
     }catch(err){

@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export enum UserRoles {
     BASIC = "BASIC",
     PREMIUM = "PREMIUM",
@@ -27,9 +29,6 @@ export interface UserProfile {
 }
 
 export interface EmailSchemaProps {
-    to: string;
-    title: string;
-    description: string;
     template_id: EmailTemplateSchemaProps;
 }
 
