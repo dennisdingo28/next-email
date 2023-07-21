@@ -8,6 +8,8 @@ import emailTemplate from "@/schemas/EmailTemplate";
 export async function POST(req: NextRequest,{params}:{params:{api_key: string}}){
     try{
         const payload = await req.json();
+        console.log(payload);
+        
         const apiKey = params.api_key;
 
         if(!payload || Object.keys(payload).length===0)
@@ -50,6 +52,8 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
 
         return NextResponse.json({msg:'Email was successfully sent.'});
     }catch(err){
+        console.log('ERROR',err);
+        
         if(err instanceof JsonWebTokenError)
         {
             if(err.message==='invalid signature')
