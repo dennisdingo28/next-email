@@ -13,7 +13,7 @@ interface EmailCustomizationFieldsProps {
 }
 
 const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({template}) => {
-   const [properties,setProperties] = useState(template.properties);
+   const [properties,setProperties] = useState({...template.properties,to:""});
    const selectedTemplate = useSelectedTemplateId();
    const [loading,setLoading] = useState<boolean>(false);
 
@@ -22,7 +22,6 @@ const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({temp
       setLoading(true);
       await axios.post('/api/sendEmail/99791bb12fcc95d5115c4141b3507b',{
         email:{
-          to:"dennismoldovan32@gmail.com",
           subject:"this is from next email",
           description:"lorem ipsum dolorem itum",
           ...properties,

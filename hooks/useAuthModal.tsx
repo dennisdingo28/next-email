@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import {create} from "zustand";
 
 interface useAuthModalProps {

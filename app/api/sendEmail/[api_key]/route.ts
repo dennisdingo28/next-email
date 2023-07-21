@@ -17,7 +17,7 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
             throw new Error('No payload was received. Please try again later.');
         if(!apiKey || apiKey.trim()==='')
             throw new Error('No api key was provided. Please try again later.');
-        if(!payload.templateId ||   payload.templateId.trim()==='')
+        if(!payload.templateId || payload.templateId.trim()==='')
             throw new Error('No template id was provided. Please try again later.');
         
         const decodedInfo = jwt.verify(payload.access_token,process.env.JWT_ENCRYPTION!);

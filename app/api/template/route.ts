@@ -7,7 +7,7 @@ export async function POST(req: NextRequest){
     try{
         const data = await req.json();
                 
-        if(!data || !data.htmlContent || !data.htmlContent.html || Object.keys(data.htmlContent.html).length===0)
+        if(!data || !data.clientHtml || !data.clientHtml || Object.keys(data.clientHtml).length===0)
             return new NextResponse('Invalid payload format.',{status:400});
         if(!data.access_token || data.access_token.trim()==='')
             return new NextResponse('No access token was provided',{status:401});
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest){
         if(authorizedUser.role!=='ADMIN')
             throw new Error('You are not an admin.')
             
-        await emailTemplate.create({...data.htmlContent});
+        await emailTemplate.create({...data});
         
         return NextResponse.json({msg:"Template was successfully created!"});
     }catch(err){

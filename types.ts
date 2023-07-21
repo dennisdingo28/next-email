@@ -33,7 +33,6 @@ export interface EmailSchemaProps {
 }
 
 export interface EmailTemplateSchemaProps {
-   html: string;
    clientHtml: string;
    properties: object;
 }
