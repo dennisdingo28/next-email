@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { EmailTemplateSchemaProps } from "@/types";
 import useSelectedTemplateId from "@/hooks/useSelectedTemplateId";
 import axios from "axios";
-import Paragraph from "./ui/paragraph";
 import EmailCustomizationHeader from "./EmailCustomizationHeader";
 import LargeHeading from "./ui/LargeHeading";
 

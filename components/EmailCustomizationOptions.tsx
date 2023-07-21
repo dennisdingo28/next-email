@@ -14,7 +14,7 @@ const EmailCustomizationOptions: React.FC<EmailCustomizationOptionsProps> = ({te
     console.log(properties);
     
   return (
-    <div>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
         {Object.keys(properties).map(key=>(
             <EmailCustomizationField key={key} prop={key} value={properties[key]} properties={properties} setProperties={setProperties}/>
         ))}

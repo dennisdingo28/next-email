@@ -14,7 +14,7 @@ const ApiKey: React.FC<ApiKeyProps> = async ({className}) => {
     
   return (
     <div className={cn(className)}>
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center justify-center gap-2 mb-2 mt-6 sm:justify-start">
             <LargeHeading text="your api key" className="text-[1.1em] text-slate-200"/>
             <CopyBtn value={user.apiKey} className="rounded-full hover:border-slate-700 text-gray-600 dark:text-gray-300 hover:text-gray-400 duration-75 "/>
         </div>
