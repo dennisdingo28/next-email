@@ -10,7 +10,6 @@ import generateApiKey from "@/lib/generateApiKey";
 export async function POST(req: NextRequest){
     try{
         const data = await req.json();
-        console.log(data);
         //validation
         if(!data || Object.keys(data).length===0)
             return new NextResponse("The payload was empty. Please try again later.",{status:400});

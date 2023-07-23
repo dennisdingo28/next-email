@@ -9,7 +9,6 @@ import email from "@/schemas/Email";
 export async function POST(req: NextRequest,{params}:{params:{api_key: string}}){
     try{
         const payload = await req.json();
-        console.log(payload);
         
         const apiKey = params.api_key;
 
@@ -25,12 +24,10 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
         if(!authorizedUser)
             throw new Error('Cannot find any user with the provided credentials. Please try again later.');
 
-        console.log(authorizedUser);
 
         const email_template = await emailTemplate.findById({_id:payload.templateId}); 
         if(!email_template)
             throw new Error(`Cannot find any template with id: ${payload.templateId}`);
-        console.log(email_template);
         
         //nodemailer
         const transporter = nodemailer.createTransport({

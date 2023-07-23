@@ -7,7 +7,6 @@ import UserProfile from './ui/user-profile'
 
 const Navbar: React.FC = async () => {
   const session = await getAuthSession();
-  console.log(session);
   
   return(
     <nav className='flex flex-col xs:flex-row items-center justify-center px-1 xs:px-2 gap-6 xs:gap-12 py-4 border-b border-b-slate-700 font-roboto'>

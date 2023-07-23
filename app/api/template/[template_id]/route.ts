@@ -3,7 +3,6 @@ import { NextRequest, NextResponse} from "next/server";
 export async function GET(req: NextRequest,{params}:{params:{template_id: string}}){
     try{
         
-        console.log(params.template_id)
         if(!params || !params.template_id)
             throw new Error('You must provide a template id.');
 
