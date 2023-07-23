@@ -9,21 +9,31 @@ interface CodeExampleProps extends HTMLAttributes<HTMLDivElement>{};
 const CodeExample: React.FC<CodeExampleProps> = ({className}) => {
     const origin = useOrigin();
     console.log(origin);
-    
-const apiExample=`import axios from 'axios'
-
-async function sendEmail(email){
-    try{
-        const emailResponse = await axios.post("${origin}/api/[api_key]/[template_id]/sendEmail",{
-            to:"testemail@gmail.com",
-            title:"Hello there",
-            description:"this is a test email"
-        });
-    }catch(err){
-        console.log(err);
-        //handle err appropiatley
+    const currentRoute = `${origin}/api/:your_api_key`;
+const apiExample=`app.post('/sendEmail', async (req, res) => {
+    try {
+      const token = req.params.token;
+      const data = {
+        email: {
+          to: 'dennismoldovan32@gmail.com',
+          subject: 'Hello from NextEmail',
+          description: 'send emails, while your focus is only the design, we got everything ready for you',
+          headingColor: '#ffffff',
+          paragraphColor: '#ffffff',
+          buttonColor: '#000',
+          buttonText: 'Visit our website',
+          buttonLink: 'http://localhost:3001/',
+          buttonTextColor: '#ffffff',
+        },
+        templateId: '64bab644f19d3279914077b1',
+      };
+  
+      const response = await axios.post('${currentRoute}', data);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred while sending the email.' });
     }
-}`;    
+})`;    
     
    
   return (

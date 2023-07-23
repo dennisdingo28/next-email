@@ -20,8 +20,10 @@ const MailPreview: React.FC<MailPreviewProps> = ({to,title,description,templateN
         <div className="templateBody px-4 py-2 space-y-4">
             <Heading className="text-center font-medium font-roboto text-[#d9d9d9]" text={title}/>
             <Paragraph text={description} className="text-gray-400"/>
-            <Button>Visit our website</Button>
-        </div>
+            <a href={`http://localhost:3000/`} className='text-decoration: none;'>
+              <button className='bg-[#000] text-white rounded-[10px] p-2 border-none cursor-pointer;'>Visit our website</button>
+            </a>
+      </div>
     </div>
   )
 }

@@ -9,7 +9,7 @@ const Description = () => {
   return (
     <div className="mt-8 font-roboto">
         <Heading text="What is NextEmail ?" className="mt-16 text-center whitespace-wrap"/>
-        <Paragraph text="Our email sending tool aims to simplify the process of working with emails and streamline the sending process. With just two clicks and a single line of code, you can securely send emails using custom templates, allowing you to stay productive and focus on the crucial aspects of your development workflow." className="ml-2 font-roboto text-start"/>
+        <Paragraph text="Our email sending tool aims to simplify the process of working with emails and streamline the sending process. With just few clicks, you can securely send emails using custom templates, allowing you to stay productive and focus on the crucial aspects of your development workflow." className="ml-2 font-roboto text-start"/>
         <div className="mt-10 flex flex-col items-center justify-between gap-5 xl:flex-row">
           <CodeExample className="flex-1 max-w-[100%]"/>
           <IndicateArrow label="the server process the request"/>
