@@ -22,7 +22,7 @@ const apiExample=`app.post('/sendEmail', async (req, res) => {
           paragraphColor: '#ffffff',
           buttonColor: '#000',
           buttonText: 'Visit our website',
-          buttonLink: 'http://localhost:3001/',
+          buttonLink: 'your link',
           buttonTextColor: '#ffffff',
         },
         templateId: '64bab644f19d3279914077b1',
