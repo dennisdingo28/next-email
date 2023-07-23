@@ -1,5 +1,4 @@
 import emailTemplate from "@/schemas/EmailTemplate";
-import { EmailTemplateSchemaProps } from "@/types";
 
 export default async function getTemplates(limit?: number){
     let templates = [];
