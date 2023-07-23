@@ -1,6 +1,6 @@
 import user from "@/schemas/User";
 import { NextRequest, NextResponse } from "next/server";
-import jwt, {JsonWebTokenError, JwtPayload} from "jsonwebtoken";
+import  {JsonWebTokenError} from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import handlebars from "handlebars";
 import emailTemplate from "@/schemas/EmailTemplate";
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
 
         await user.findOneAndUpdate({apiKey},{$push:{sentEmails:newEmail._id}},{new:true,runValidators:true});
 
-        return NextResponse.json({msg:'Email was successfully sent.'});
+        return NextResponse.json({msg:'Email was successfully sent.'},{status:200});
     }catch(err){
         console.log('ERROR',err);
         
@@ -63,6 +63,10 @@ export async function POST(req: NextRequest,{params}:{params:{api_key: string}})
             if(err.message==='invalid signature')
                 return new NextResponse(`Invalid decrypion token`,{status:401});
         }
-        return new NextResponse(`${(err as Error).message}`,{status:400});
+        return new NextResponse(`${(err as Error).message}`,{status:400,headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          }});
     }
 }
