@@ -6,7 +6,7 @@ interface useSelectedTemplateIdProps {
 }
 
 const useSelectedTemplateId = create<useSelectedTemplateIdProps>((set)=>({
-    id:"64bab644f19d3279914077b1",
+    id:"64bd67a89ab2ec41a4343b94",
     setSelectedTemplateId:(id: string)=>set({id:id}),
 }));
 

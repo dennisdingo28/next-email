@@ -6,8 +6,13 @@ import useSelectedTemplateId from "@/hooks/useSelectedTemplateId";
 import axios from "axios";
 import EmailCustomizationHeader from "./EmailCustomizationHeader";
 import LargeHeading from "./ui/LargeHeading";
+import { User } from "next-auth";
 
-const EmailCustomization: React.FC = () => {
+interface EmailCustomizationProps {
+  user: any;
+}
+
+const EmailCustomization: React.FC<EmailCustomizationProps> = ({user}) => {
   const [emailTemplate,setEmailTemplate] = useState<EmailTemplateSchemaProps & {_id: string} | null>();
   const [loading,setLoading] = useState<boolean>(true);
 
@@ -45,7 +50,7 @@ const EmailCustomization: React.FC = () => {
       return (
         <div>
           <div>
-            <EmailCustomizationFields template={emailTemplate}/>
+            <EmailCustomizationFields user={user} template={emailTemplate}/>
           </div>
         </div>
       )

@@ -10,17 +10,19 @@ import { toast } from "react-hot-toast";
 
 interface EmailCustomizationFieldsProps {
   template: EmailTemplateSchemaProps & { _id: string };
+  user: any;
 }
 
-const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({template}) => {
+const EmailCustomizationFields: React.FC<EmailCustomizationFieldsProps> = ({template,user}) => {
    const [properties,setProperties] = useState({...template.properties,to:""});
    const selectedTemplate = useSelectedTemplateId();
    const [loading,setLoading] = useState<boolean>(false);
-
+    console.log("user",user);
+    
    async function sendMail(){
     try{
       setLoading(true);
-      await axios.post('/api/sendEmail/99791bb12fcc95d5115c4141b3507b',{
+      await axios.post(`/api/sendEmail/${user.apiKey}`,{
         email:{
           subject:"this is from next email",
           description:"lorem ipsum dolorem itum",
